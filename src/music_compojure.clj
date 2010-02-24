@@ -22,7 +22,8 @@
   (:use music-compojure.notes)
   (:use music-compojure.util))
 
-(def _ list)
+(defn _ [& args]
+  (apply list (drop-last args)))
 
 (def *ppq* 1152)
 

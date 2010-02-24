@@ -46,7 +46,7 @@
     g4 8, f+4 8,  e4 4,
     a3 4,   r 4,
     g4 8, f+4 8,  g4 8,  a4 8,
-   (_ b4 d5) 4,  a4 8,  g4 8,
+   (_ b4 d5 _) 4,  a4 8,  g4 8,
     e4 4,  d4 4
      r 2])
 
@@ -55,8 +55,8 @@
     d3 4,  a2 4,
      r 4,  a3 4,
     d3 4,  a2 4
-     r 4, (_ g2 d3 g3) 4,
-     r 4, (_ a2 e3 a3) 4,
+     r 4, (_ g2 d3 g3 _) 4,
+     r 4, (_ a2 e3 a3 _) 4,
      r 2,
     d3 4,
     d2 4
@@ -65,8 +65,9 @@
 (def music
   (_ [ {:tempo 240 :channel 1 :program 1 :duration 0.2}
           melody1-rh melody1-rh melody2-rh melody2-rh]
-        [ {:channel 2 :program 1 :duration 0.6}
-          melody1-lh melody1-lh melody2-lh melody2-lh]))
+     [ {:channel 2 :program 1 :duration 0.6}
+          melody1-lh melody1-lh melody2-lh melody2-lh] _)
+)
 
 (create-midi-file
   music (str (char 0xA9) " 1994 Matthew Howlett") "/tmp/out1.mid")
