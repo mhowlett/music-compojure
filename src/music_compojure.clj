@@ -32,6 +32,7 @@
     :up-velocity 0
     :channel 0
     :spacing 4
+    :spacing-inverted true
     :note c4
     :duration 0.9
     :format [:note :spacing] })
@@ -47,6 +48,14 @@
     (contains? map :format)
       (recur track (dissoc map :format) current-tick 
         (assoc current-settings :format (:format map)))
+
+    (contains? map :spacing)
+      (recur track (dissoc map :spacing) current-tick 
+        (assoc current-settings :spacing (:spacing map)))
+
+    (contains? map :spacing-inverted)
+      (recur track (dissoc map :spacing-inverted) current-tick 
+        (assoc current-settings :spacing-inverted (:spacing-inverted map)))
 
     (contains? map :note)
       (recur track (dissoc map :note) current-tick 
@@ -126,8 +135,12 @@
               (:channel current-settings)
               %
               (:up-velocity current-settings)
-              (+ (* (* (/ 4 spacing) *ppq*) (:duration current-settings))
-                current-tick))))))
+              (+ (* (* (* 4 
+                          (if (:spacing-inverted current-settings)
+                            (/ 1.0 spacing)
+                            spacing))
+                *ppq*) (:duration current-settings))
+                current-tick) )))))
     list)))
 
 (defn calc-event-data [vec settings]
@@ -194,7 +207,11 @@
                   (recur 
                     track 
                     (rest vector) 
-                    (+ (* (/ 4 (:spacing event-data)) *ppq*) current-tick)
+                    (+ (* (* 4 
+                             (if (:spacing-inverted current-settings)
+                               (/ 1.0 (:spacing event-data))
+                               (:spacing event-data)))
+                        *ppq*) current-tick)
                     '() 
                     current-settings))))))))))
 

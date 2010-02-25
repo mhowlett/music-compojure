@@ -63,10 +63,11 @@
 ])
 
 (def music
-  (_ [ {:tempo 240 :channel 1 :program 1 :duration 0.2}
+  [{:spacing-inverted true}
+    (_ [ {:tempo 240 :channel 1 :program 1 :duration 0.2}
           melody1-rh melody1-rh melody2-rh melody2-rh]
-     [ {:channel 2 :program 1 :duration 0.6}
-          melody1-lh melody1-lh melody2-lh melody2-lh] _)
+       [ {:channel 2 :program 1 :duration 0.4}
+          melody1-lh melody1-lh melody2-lh melody2-lh] _) 0 ]
 )
 
 (create-midi-file

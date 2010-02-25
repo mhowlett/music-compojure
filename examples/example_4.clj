@@ -18,7 +18,7 @@
   (:use music-compojure))
 
 ; base drum
-(def bd [{format [:note :velocity]} 36 127])
+(def bd [{:format [:note :velocity]} 36 127])
 
 ; hihats and cymbals
 (def h1 [{:format [:note :velocity]} 42 20])
@@ -35,29 +35,24 @@
 (def r -1)
 
 
+(defn interleave-constant [vect stride const]
+ )
+
+
 (def hh-riff-1 [{:format [:note]}
-    r h1 r h2, r  h1 h1 h3
-    r h1 r h2, r  h1 r  h3
-    r h1 r h1, r  h1 r  h3
-    r h1 r h1, h1 h2 h3 c1])
+    h1 h2 h1 h2])
 
 (def sd-riff-1 [{:format [:note]}
-    r r s1 r, r  r s1 r 
-    r r s1 r, s1 r s1 r 
-    r r s1 r, r  r s1 r 
-    r r s2 r, [{:format [:velocity] :note sd-note-1 :spacing 8}
-               20 40 60 75 90 100 110 127]]) 
+    s1 s1 s1 s2])
 
 (def bd-riff-1 [{:format [:note]}
-    bd r r r, bd r r r,
-    bd r r r, bd r r r,
-    bd r r r, bd r r r,
-    bd r bd r, bd r bd r])
+    bd bd bd bd])
 
 (def music
-  (_ [{:channel 1} hh-riff-1 hh-riff-1 hh-riff-1 hh-riff-1]
-     [{:channel 2} sd-riff-1 sd-riff-1 sd-riff-1 sd-riff-1]
-     [{:channel 3} bd-riff-1 bd-riff-1 bd-riff-1 bd-riff-1] _))
+  (_ [{:spacing 0.125 :spacing-inverted false :channel 1} hh-riff-1 hh-riff-1 hh-riff-1 hh-riff-1]
+     [{:spacing 8 :channel 2} sd-riff-1 sd-riff-1 sd-riff-1 sd-riff-1]
+     [{:spacing 8 :channel 3} bd-riff-1 bd-riff-1 bd-riff-1 bd-riff-1] _))
+
 
 (create-midi-file
   music (str (char 0xA9) " 2009 Matthew Howlett") "/tmp/out4.mid")
