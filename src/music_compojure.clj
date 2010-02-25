@@ -33,6 +33,7 @@
     :channel 0
     :spacing 4
     :spacing-inverted true
+    :offset 0
     :note c4
     :duration 0.9
     :format [:note :spacing] })
@@ -44,6 +45,10 @@
     (contains? map :velocity)
       (recur track (dissoc map :velocity) current-tick 
         (assoc current-settings :velocity (:velocity map)))
+
+    (contains? map :offset)
+      (recur track (dissoc map :offset) current-tick 
+        (assoc current-settings :offset (:offset map)))
 
     (contains? map :format)
       (recur track (dissoc map :format) current-tick 

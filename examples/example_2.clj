@@ -15,10 +15,21 @@
 ;  along with music-compojure.  If not, see <http://www.gnu.org/licenses/>.
 
 (ns example-2
+  (:import java.util.Random)
   (:use music-compojure)
   (:use music-compojure.notes)
   (:use music-compojure.generators))
 
-(def music [(chromatic-scale a4 12 :up)] )
+(def rnd (Random.))
+
+(def scale [0 2 4 5 7 9 11])
+(def durations [2 4 4 8 8 8])
+
+(def notes (take 100 (repeatedly #(vector 
+                                    (+ 60 (get scale (. rnd nextInt 7)))
+                                    (get durations (. rnd nextInt 6))))))
+
+(def music
+  [{:format [:note :spacing]} (vec notes)])
 
 (create-midi-file music "/tmp/out2.mid")
