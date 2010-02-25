@@ -28,29 +28,33 @@
 
 ; snare drums
 (def sd-note-1 38)
-(def s1 [{:format [:note :velocity]} sd-note-1 40])
-(def s2 [{:format [:note :velocity]} 40 30])
+(def s1 [{:format [:note :velocity]} sd-note-1 10])
+(def s2 [{:format [:note :velocity]} sd-note-1 40])
+(def s3 [{:format [:note :velocity]} 40 30])
 
 ; rest
 (def r -1)
 
 
-(defn interleave-constant [vect stride const]
- )
+(def hh-riff-1 [{:format [:note]} r  h1 r  h1 r  h1 r  h1])
+(def hh-riff-2 [{:format [:note]} r  h1 r  h1 r  h1 h2 h3])
+(def hh-riff-3 [{:format [:note]} r  h1 r  h1 r  h1 h2 h3])
 
+(def rf1 [{:format [:velocity]
+           :spacing-inverted false 
+           :spacing (/ 1.0 16) 
+           :note sd-note-1}
+          5 10 15 20 25 30 35 40])
 
-(def hh-riff-1 [{:format [:note]}
-    h1 h2 h1 h2])
+(def sd-riff-1 [{:format [:note]} r  r  s2 r  r  r  s2 r ])
+(def sd-riff-2 [{:format [:note]} r  r  s2 r  r  s1 s2 r ])
+(def sd-riff-3 [{:format [:note]} r  r  s2 r  rf1])
 
-(def sd-riff-1 [{:format [:note]}
-    s1 s1 s1 s2])
-
-(def bd-riff-1 [{:format [:note]}
-    bd bd bd bd])
+(def bd-riff-1 [{:format [:note]} bd r  r  r  bd r  r  r ])
 
 (def music
-  (_ [{:spacing 0.125 :spacing-inverted false :channel 1} hh-riff-1 hh-riff-1 hh-riff-1 hh-riff-1]
-     [{:spacing 8 :channel 2} sd-riff-1 sd-riff-1 sd-riff-1 sd-riff-1]
+  (_ [{:spacing 8 :channel 1} hh-riff-1 hh-riff-2 hh-riff-1 hh-riff-3]
+     [{:spacing 8 :channel 2} sd-riff-1 sd-riff-1 sd-riff-2 sd-riff-3]
      [{:spacing 8 :channel 3} bd-riff-1 bd-riff-1 bd-riff-1 bd-riff-1] _))
 
 
