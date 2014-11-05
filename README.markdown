@@ -29,3 +29,5 @@ To execute an example, go to the examples directory and type `./run example_1.cl
 * This is an early release, there is lots to do.
 
 [TODO List](http://github.com/mhowlett/music-compojure/blob/master/TODO.markdown)
+
+A project by [Matt Howlett](http://www.matthowlett.com)
