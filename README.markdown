@@ -30,4 +30,4 @@ To execute an example, go to the examples directory and type `./run example_1.cl
 
 [TODO List](http://github.com/mhowlett/music-compojure/blob/master/TODO.markdown)
 
-A project by [Matt Howlett](http://www.matthowlett.com)
+A project by [Matt Howlett](https://www.matthowlett.com)
